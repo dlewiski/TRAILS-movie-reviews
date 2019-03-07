@@ -1,9 +1,18 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 
-app.get('/', (req, res) => res.send("App route working"));
+// DB Config
+const db = require('./config/keys').mongoURI;
 
-const PORT = process.env.PORT || 5000;
+// Connect to MongoDB atlas
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(() => console.log('MongoDB Atlas connected'))
+  .catch(err => console.log(err))
+
+app.get('/', (req, res) => res.send("App route working!"));
+
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
