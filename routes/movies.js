@@ -87,6 +87,29 @@ router.post('/review/:id', (req, res) => {
   .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
 });
 
+// @route DELETE movies/review/:id/:review_id
+// @desc Remove review from movie listing
+router.delete('/review/:id/:review_id', (req, res) => {
+  Movie.findById(req.params.id)
+  .then(movie => {
+    // Check if comment exists
+    if( movie.reviews.filter(review => review.id.toString() === req.params.review_id).length === 0 ) {
+      return res.status(404).json({ reviewNotExist: "Review does not exist" })
+    }
+
+    // Get remove index
+    const removeIndex = movie.reviews
+    .map(review => review._id.toString())
+    .indexOf(req.params.review_id);
+
+    // Splice review out of array
+    movie.reviews.splice(removeIndex, 1);
+
+    movie.save().then(movie => res.json(movie));
+  })
+  .catch(err => res.status(404).json({ review: 'No review found' }));
+});
+
 
 
 module.exports = router;
