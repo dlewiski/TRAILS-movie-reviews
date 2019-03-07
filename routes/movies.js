@@ -87,12 +87,30 @@ router.post('/review/:id', (req, res) => {
   .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
 });
 
+// @route POST movies/review/:id/update/:review_id
+// @desc Update review on movie listing
+router.post('/review/:id/update/:review_id', (req, res) => {
+  Movie.findById(req.params.id)
+  .then(movie => {
+    const newReview = {
+      text: req.body.text
+    }
+
+    // Add to reviews array
+    movie.reviews.unshift(newReview);
+
+    // Save
+    movie.save().then(movie => res.json(movie))
+  })
+  .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
+});
+
 // @route DELETE movies/review/:id/:review_id
 // @desc Remove review from movie listing
 router.delete('/review/:id/:review_id', (req, res) => {
   Movie.findById(req.params.id)
   .then(movie => {
-    // Check if comment exists
+    // Check if review exists
     if( movie.reviews.filter(review => review.id.toString() === req.params.review_id).length === 0 ) {
       return res.status(404).json({ reviewNotExist: "Review does not exist" })
     }
