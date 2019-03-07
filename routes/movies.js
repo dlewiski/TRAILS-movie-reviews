@@ -9,6 +9,23 @@ const Movie = require('../models/Movie');
 // @desc Tests movies route
 router.get('/test', (req, res) => res.json({msg: "Movies Works!"}));
 
+// @route GET movies/
+// @desc Get movies
+router.get('/', (req, res) => {
+  Movie.find()
+    .sort({name: 1})
+    .then(movies => res.json(movies))
+    .catch(err => res.status(404).json({noMoviesFound: "No movies found"}));
+});
+
+// @route GET movies/:id
+// @desc Get movie by id
+router.get('/:id', (req, res) => {
+  Movie.findById(req.params.id)
+    .then(movie => res.json(movie))
+    .catch(err => res.status(404).json({noMovieFound: "No movie found with that ID"}));
+});
+
 // @route POST movies
 // @desc Create movie listing
 router.post('/add', (req, res) => {
