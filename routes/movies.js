@@ -7,7 +7,7 @@ const Movie = require('../models/Movie');
 
 // @route GET movies/test
 // @desc Tests movies route
-router.get('/test', (req, res) => res.json({msg: "Movies Works!"}));
+router.get('/test', (req, res) => res.json({msg: 'Movies Works!'}));
 
 // @route GET movies/
 // @desc Get movies
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   Movie.find()
     .sort({name: 1})
     .then(movies => res.json(movies))
-    .catch(err => res.status(404).json({noMoviesFound: "No movies found"}));
+    .catch(err => res.status(404).json({noMoviesFound: 'No movies found'}));
 });
 
 // @route GET movies/:id
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Movie.findById(req.params.id)
     .then(movie => res.json(movie))
-    .catch(err => res.status(404).json({noMovieFound: "No movie found with that ID"}));
+    .catch(err => res.status(404).json({noMovieFound: 'No movie found with that ID'}));
 });
 
 // @route POST movies
@@ -52,7 +52,17 @@ router.post('/update/:id', (req, res) => {
     { new: true }
   )
     .then(movie => res.json(movie))
-    .catch(err => res.status(404).json({cannotUdate: "Could not update movie"}));
+    .catch(err => res.status(404).json({cannotUdate: 'Could not update movie'}));
+});
+
+// @route DELETE movies/:id
+// @desc Create movie listing
+router.delete('/:id', (req, res) => {
+  Movie.findById(req.params.id)
+  .then(movie => {
+    movie.remove().then(() => res.json({success: true}));
+  })
+  .catch(err => res.status(404).res.json({movieNotFound: 'Movie not found'}));
 });
 
 
