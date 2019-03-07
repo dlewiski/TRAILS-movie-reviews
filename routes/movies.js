@@ -5,12 +5,14 @@ const mongoose = require('mongoose');
 // Import Movie model
 const Movie = require('../models/Movie');
 
+// Routes for movie listings
+
 // @route GET movies/test
 // @desc Tests movies route
 router.get('/test', (req, res) => res.json({msg: 'Movies Works!'}));
 
 // @route GET movies/
-// @desc Get movies
+// @desc Get movie listings
 router.get('/', (req, res) => {
   Movie.find()
     .sort({name: 1})
@@ -19,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 // @route GET movies/:id
-// @desc Get movie by id
+// @desc Get movie listing by id
 router.get('/:id', (req, res) => {
   Movie.findById(req.params.id)
     .then(movie => res.json(movie))
@@ -39,7 +41,7 @@ router.post('/add', (req, res) => {
 });
 
 // @route Post movies/update/:id
-// @desc Update specific movie
+// @desc Update specific movie listing
 router.post('/update/:id', (req, res) => {
   const movieFields = {};
     if (req.body.name) movieFields.name = req.body.name;
@@ -56,7 +58,7 @@ router.post('/update/:id', (req, res) => {
 });
 
 // @route DELETE movies/:id
-// @desc Create movie listing
+// @desc Delete a movie listing
 router.delete('/:id', (req, res) => {
   Movie.findById(req.params.id)
   .then(movie => {
@@ -64,6 +66,27 @@ router.delete('/:id', (req, res) => {
   })
   .catch(err => res.status(404).res.json({movieNotFound: 'Movie not found'}));
 });
+
+// Routes for reviews to movie listings
+
+// @route POST movies/review/:id
+// @desc Add review to movie listing
+router.post('/review/:id', (req, res) => {
+  Movie.findById(req.params.id)
+  .then(movie => {
+    const newReview = {
+      text: req.body.text
+    }
+
+    // Add to reviews array
+    movie.reviews.unshift(newReview);
+
+    // Save
+    movie.save().then(movie => res.json(movie))
+  })
+  .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
+});
+
 
 
 module.exports = router;

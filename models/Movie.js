@@ -13,7 +13,7 @@ const MovieSchema = new Schema({
   },
   reviews: [
     {
-      content: {
+      text: {
         type: String
       },
       date: {
