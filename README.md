@@ -11,8 +11,8 @@ Using JavaScript (Node, Express, MongoDB, and any front-end framework), create a
 * Add movies that have a name, description, and year
 * Add reviews to each movie
 * Edit the movies
-* See draft of review as it is being typed
-* See draft of movie as it is being typed
+* See preview of review as it is being typed
+* See preview of movie as it is being typed
 
 ### Technologies Used
 * React.js
