@@ -92,17 +92,20 @@ router.post('/review/:id', (req, res) => {
 router.post('/review/:id/update/:review_id', (req, res) => {
   Movie.findById(req.params.id)
   .then(movie => {
-    const newReview = {
-      text: req.body.text
+    // Check if review exists
+    if( movie.reviews.filter(review => review.id.toString() === req.params.review_id).length === 0 ) {
+      return res.status(404).json({ reviewNotExist: "Review does not exist" })
     }
 
-    // Add to reviews array
-    movie.reviews.unshift(newReview);
+    // Find review in array and set to new value
+    movie.reviews
+    .find(review => review.id.toString() === req.params.review_id)
+    .text = req.body.text
 
     // Save
     movie.save().then(movie => res.json(movie))
   })
-  .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
+  .catch(err => res.status(404).json({ reviewNotFound: 'No post found' }));
 });
 
 // @route DELETE movies/review/:id/:review_id
