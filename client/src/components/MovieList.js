@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import Movie from './Movie'
 
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
 export default class MovieList extends React.Component {
 
   constructor(props) {
@@ -15,8 +18,24 @@ export default class MovieList extends React.Component {
     this.getMovies()
   }
 
+  componentDidUpdate() {
+    this.getMovies()
+  }
+
+  componentWillUnmount() {
+    // Prevent multiple db calls, cancel async task
+    source.cancel()
+  }
+
   getMovies = () => {
-    axios.get('/movies')
+    axios.get('/movies', { cancelToken: source.token })
+    .catch( thrown => {
+      if (axios.isCancel(thrown)) {
+        console.log('Request canceled', thrown.message);
+      } else {
+        // handle error
+      }
+    })
     .then(response => {
       this.setState({movies: response.data});
     })

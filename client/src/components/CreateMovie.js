@@ -38,6 +38,8 @@ export default class CreateMovie extends React.Component {
       description: '',
       year: 1900,
     })
+
+    this.props.history.push('/');
   }
 
   render() {
