@@ -4,3 +4,4 @@ node_modules/
 *.orig
 .idea/
 config/keys_dev.js
+/lib
