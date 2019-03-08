@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
 import CreateMovie from './components/CreateMovie';
 import EditMovie from './components/EditMovie';
+import FeaturedMovie from './components/FeaturedMovie'
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
       <BrowserRouter>
         <div className = "container">
           <Navbar />
+          <Route exact path="/" component={ FeaturedMovie } />
           <Route exact path="/movies" component={ MovieList } />
           <Route exact path="/movies/add" component={ CreateMovie } />
           <Route exact path="/movies/update/:id" component={ EditMovie } />
