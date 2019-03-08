@@ -3,3 +3,4 @@ node_modules/
 .env
 *.orig
 .idea/
+config/keys_dev.js
