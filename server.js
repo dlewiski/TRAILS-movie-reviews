@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 
 const movies = require('./routes/movies');
@@ -10,6 +11,12 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Enable cors
+app.use(cors());
+
+// Setup for deployment
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 // DB Config
 const db = require('./config/keys').mongoURI;
