@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import Movie from './Movie';
+
 export default class CreateMovie extends React.Component {
 
   constructor(props) {
@@ -9,6 +11,7 @@ export default class CreateMovie extends React.Component {
       name: '',
       description: '',
       year: 1900,
+      reviews: []
     }
   }
 
@@ -42,15 +45,27 @@ export default class CreateMovie extends React.Component {
       <div>
         <h3>Create New Movie Listing</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Movie Title:</label>
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-            />
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label>Movie Title:</label>
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                value={this.state.name}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group col-md-6">
+              <label>Year Released:</label>
+              <input
+                type="number"
+                name="year"
+                className="form-control"
+                value={this.state.year}
+                onChange={this.onChange}
+              />
+            </div>
           </div>
           <div className="form-group">
             <label>Movie Description:</label>
@@ -63,23 +78,18 @@ export default class CreateMovie extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label>Year Released:</label>
-            <input
-              type="number"
-              name="year"
-              className="form-control"
-              value={this.state.year}
-              onChange={this.onChange}
-            />
-          </div>
-          <div className="form-group">
             <input type="submit" value="Add Movie Listing" className="btn btn-primary" />
           </div>
         </form>
-        <h4>New Movie to be added</h4>
-        <p>Movie Title: {this.state.name}</p>
-        <p>Movie Description: {this.state.description}</p>
-        <p>Movie Year: {this.state.year}</p>
+        <h4>New Movie to be added:</h4>
+        <div className="card" style={{ marginTop: 10 }}>
+          <h5 className="card-header">{this.state.name}</h5>
+          <div className="card-body">
+            <p className="card-title">Year Released: {this.state.year}</p>
+            <p className="card-text">Description: {this.state.description}</p>
+            <h5>{this.state.name} Reviews:</h5>
+          </div>
+        </div>
       </div>
     )
   }

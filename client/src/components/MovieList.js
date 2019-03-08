@@ -34,6 +34,7 @@ export default class MovieList extends React.Component {
   render() {
     return(
       <div>
+        <h3>Movie Listings</h3>
         {this.movieList()}
       </div>
     )
