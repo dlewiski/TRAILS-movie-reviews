@@ -8,7 +8,7 @@ export default class EditMovie extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {reviews: []}
+    this.state = {reviews: [], movieId: this.props.match.params.id}
   }
 
   componentDidMount() {

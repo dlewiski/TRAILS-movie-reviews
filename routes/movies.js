@@ -49,7 +49,7 @@ router.post('/update/:id', (req, res) => {
     if (req.body.year) movieFields.year = req.body.year;
 
   Movie.findOneAndUpdate(
-    { id: req.body.id },
+    { _id: req.params.id },
     { $set: movieFields },
     { new: true }
   )
