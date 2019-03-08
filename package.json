@@ -4,7 +4,8 @@
   "description": "Movie Review app coding challenge",
   "main": "server.js",
   "engines": {
-    "node": "11.10.1"
+    "node": "11.10.1",
+    "npm": "6.9.0"
   },
   "scripts": {
     "client-install": "npm install --prefix client",
