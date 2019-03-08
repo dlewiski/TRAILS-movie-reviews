@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({noMovieFound: 'No movie found with that ID'}));
 });
 
-// @route POST movies
+// @route POST movies/add
 // @desc Create movie listing
 router.post('/add', (req, res) => {
   const newMovie = new Movie({

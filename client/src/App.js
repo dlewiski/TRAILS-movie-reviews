@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
+import CreateMovie from './components/CreateMovie';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <div className = "container">
           <Navbar />
           <Route exact path="/movies" component={ MovieList } />
+          <Route exact path="/movies/add" component={ CreateMovie } />
         </div>
       </BrowserRouter>
     );
