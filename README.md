@@ -23,9 +23,10 @@ Using JavaScript (Node, Express, MongoDB, and any front-end framework), create a
 
 ### Technologies Used
 * React.js
-* Node
+* Node.js
 * Express
-* MongoDB
+* MongoDB Atlas
+* Mongoose
 * Heroku
 * Bootstrap V4
 
