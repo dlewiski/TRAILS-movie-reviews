@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import Movie from './Movie'
+
 export default class MovieList extends React.Component {
 
   constructor(props) {
@@ -13,29 +15,27 @@ export default class MovieList extends React.Component {
     this.getMovies()
   }
 
-  getMovies = async () => {
-    this.cancelTokenSource = axios.CancelToken.source()
-    try {
-      const response = await axios.get('http://localhost:4000/movies/', {
-        cancelToken: this.cancelTokenSource.token
-      })
-      this.setState({movies: response.data})
-    } catch (err) {
-      if (axios.isCancel(err)) {
-        //ignore
-      } else {
-        //propegate
-        throw err
-      }
-    } finally {
-      this.cancelTokenSource = null
-    }
+  getMovies = () => {
+    axios.get('/movies')
+    .then(response => {
+      this.setState({movies: response.data});
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+  movieList = () => {
+    return this.state.movies.map( movie => {
+      return <Movie movie={movie} key={movie._id} />
+    })
   }
 
   render() {
     return(
       <div>
         Movie List works!
+        {this.movieList()}
       </div>
     )
   }
