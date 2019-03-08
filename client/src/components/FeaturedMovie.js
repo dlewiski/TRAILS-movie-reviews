@@ -48,7 +48,6 @@ export default class FeaturedMovie extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
       <div>
         <h3>Featured Movie:</h3>
