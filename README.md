@@ -1,5 +1,12 @@
 # TRAILS MOVIE REVIEW APP CODING CHALLENGE
 
+Deployed version can be found at [https://trails-movie-reviews.herokuapp.com/](https://trails-movie-reviews.herokuapp.com/)
+
+### To Run app locally
+* Clone to local machine
+* Navigate to root directory
+* Enter 'npm run dev' to start both server and react app
+
 ### Prompt
 JavaScript Coding Challenge
 
@@ -21,6 +28,11 @@ Using JavaScript (Node, Express, MongoDB, and any front-end framework), create a
 * MongoDB
 * Heroku
 * Bootstrap V4
+
+### Known bugs
+* Reviews do not show up after being added on featured movie page (requires page refresh)
+* Could not proxy request error on development server
+* refreshing Movie List page and Create movie page returns only json (only on deployed version)
 
 
 ### Next steps/Other tasks to be considered
