@@ -42,7 +42,7 @@ export default class Movie extends React.Component {
           <h5 className="card-header" style={{ paddingRight: 0 }}>
             {this.props.movie.name}
             <span style={{ float: "right" }}>
-              <Link to="/" className="card-header" style={{ backgroundColor: "rgb(0,0,0,0)",
+              <Link to={"/movies/update/" + this.props.movie._id} className="card-header" style={{ backgroundColor: "rgb(0,0,0,0)",
               borderBottom: 0 }}>Edit</Link>
             </span>
           </h5>

@@ -28,3 +28,4 @@ Using JavaScript (Node, Express, MongoDB, and any front-end framework), create a
 * Unit testing
 * Integration testing
 * Add users to have ownership to reviews and movie lists
+* Authentication
